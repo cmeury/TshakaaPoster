@@ -1,0 +1,10 @@
+This is a private project for a link to IRC channel sharer. It uses
+a simple GET request to post the data.
+
+It's not really of use for anyone else than me an a few friends. But anyhow,
+if you would like to try it out, get rid of the URL in
+	ch.wurmlo.android.tshakaa.PortalCommunication
+or else we get spammed ;-)
+
+c.meury, 18 January 2012
+

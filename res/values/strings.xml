@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="userIdLabel">User ID:</string>
+    <string name="app_name">TshakaaPoster</string>
+    <string name="postButton">Share URL with #tshakaa</string>
+    <string name="notificationButton">Notify user</string>
+    <string name="saveUserIdButton">Save</string>
+    <string name="urlLabel">Enter URL:</string>
+    <string name="helpLabel">To find out your user ID, go to portal.espen.ch and login with your username and password. Now, click on your name at the top right of your screen. On the \'My Account\' page, your user ID is shown above the birth date.</string>
+    <string name="userIdTitleLabel">Personalize</string>
+    <string name="toast_userIdHasBeenSaved">User ID has been saved</string>
+    <string name="toast_postingUrlFailedNetwork">Posting URL failed (Network)</string>
+    <string name="toast_postingUrlSuccessful">Posting URL successful</string>
+    <string name="toast_postingUrlFailedSyntax">Posting URL failed (Syntax)</string>
+    <string name="tagsOkButton">Post URL</string>
+    <string name="tagsLabel">Enter comma-separated tags</string>
+    <string name="tagsDialogTitle">Tags for this URL</string>
+</resources>
