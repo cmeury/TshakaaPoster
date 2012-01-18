@@ -32,7 +32,7 @@ public class Util {
 		Pattern p = Pattern.compile("\\A.+<title>(.+)</title>.+\\Z");
 		Matcher matcher = p.matcher(content);
 		
-		// does not seem to match ... 
+		// does not seem to match ..
 		Log.i(Util.class.toString(), String.valueOf(matcher.matches()));
 		Log.i(Util.class.toString(), matcher.group());
 		Log.i(Util.class.toString(), String.valueOf(matcher.groupCount()));
