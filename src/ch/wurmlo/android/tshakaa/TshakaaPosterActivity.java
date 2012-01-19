@@ -3,17 +3,12 @@ package ch.wurmlo.android.tshakaa;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.apache.http.client.ClientProtocolException;
-
-import ch.wurmlo.android.tshakaa.exceptions.TitleException;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -28,34 +23,30 @@ import android.widget.Toast;
 public class TshakaaPosterActivity extends Activity {
 	
 	private UserPrefs prefs;
-	private String currentTags = "";
-	
+
 	/** Called when the activity is first created. */
     @Override
     public void onPostCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String action = intent.getAction();
 
-    	// load prefs
-		this.prefs = new UserPrefs(getApplicationContext());
-		
-	
-		setContentView(R.layout.main);
-		buildUI();
-		
-		Intent intent = getIntent();
-		Bundle extras = intent.getExtras();
-		String action = intent.getAction();
-		if(action.equals(Intent.ACTION_SEND)) {
-        	
-			String pageUrl = extras.getString("android.intent.extra.TEXT");
-			String pageTitle = extras.getString("android.intent.extra.SUBJECT");
-//			String tags = askForTags();
-
-	        final EditText urlText = (EditText) findViewById(R.id.urlText);
+        final EditText urlText = (EditText) findViewById(R.id.urlText);
+        
+        if(prefs == null) {
+    		this.prefs = new UserPrefs(getApplicationContext());
+    		setContentView(R.layout.main);
+    		buildUI();
+        	String pageUrl = extras.getString("android.intent.extra.TEXT");
 	        urlText.setText(pageUrl);
-			final Button shareButton = (Button) findViewById(R.id.shareButton);
-	        shareButton.performClick();
-			finish();
+        	
+        }
+		if(action.equals(Intent.ACTION_SEND)) {
+			String pageUrl = extras.getString("android.intent.extra.TEXT");
+//			String pageTitle = extras.getString("android.intent.extra.SUBJECT");
+	        urlText.setText(pageUrl);
+			showDialog(R.layout.tagsdialog);
 		}
     }
 
@@ -96,17 +87,13 @@ public class TshakaaPosterActivity extends Activity {
     private void postUrl(String tags) {
     	EditText urlText = (EditText) findViewById(R.id.urlText);
 		String url = urlText.getText().toString();
-		String title = null;
+		String title;
 		try {
 			title = Util.getTitle(url);
 		} catch (Exception e) {
 			title = "unknown title";
 			Log.e(TshakaaPosterActivity.class.toString(), e.getMessage());
 		}
-		postUrl(url, title, tags);
-    }
-    
-    private void postUrl(String url, String title, String tags) {
 		ProgressBar spinner = (ProgressBar) findViewById(R.id.spinner);
 		spinner.setVisibility(View.VISIBLE);
 		try {
@@ -168,13 +155,4 @@ public class TshakaaPosterActivity extends Activity {
     	return dialog;
     }
 
-	public String getCurrentTags() {
-		return currentTags;
-	}
-
-
-
-	public void setCurrentTags(String currentTags) {
-		this.currentTags = currentTags;
-	}
 }
