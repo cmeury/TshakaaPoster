@@ -23,7 +23,8 @@ import android.widget.Toast;
 public class TshakaaPosterActivity extends Activity {
 	
 	private UserPrefs prefs;
-
+	private String title = null;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onPostCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class TshakaaPosterActivity extends Activity {
 		String action = intent.getAction();
 		if (action.equals(Intent.ACTION_SEND)) {
 			String pageUrl = extras.getString("android.intent.extra.TEXT");
+			title = extras.getString("android.intent.extra.SUBJECT");
 			EditText urlText = (EditText) findViewById(R.id.urlText);
 			urlText.setText(pageUrl);
 			showDialog(R.layout.tagsdialog);
@@ -84,13 +86,15 @@ public class TshakaaPosterActivity extends Activity {
     private void postUrl(String tags) {
     	EditText urlText = (EditText) findViewById(R.id.urlText);
 		String url = urlText.getText().toString();
-		String title;
-		try {
-			title = Util.getTitle(url);
-		} catch (Exception e) {
-			title = "unknown title";
-			Log.e(TshakaaPosterActivity.class.toString(), e.getMessage());
+		if(title == null) {
+			try {
+				title = Util.getTitle(url);
+			} catch (Exception e) {
+				title = "unknown title";
+				Log.e(TshakaaPosterActivity.class.toString(), e.getMessage());
+			}
 		}
+		
 		ProgressBar spinner = (ProgressBar) findViewById(R.id.spinner);
 		spinner.setVisibility(View.VISIBLE);
 		try {

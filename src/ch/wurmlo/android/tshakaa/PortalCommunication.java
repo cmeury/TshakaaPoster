@@ -2,19 +2,18 @@ package ch.wurmlo.android.tshakaa;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.Scanner;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
-//import org.apache.http.HttpEntity;
-//import org.apache.http.HttpResponse;
-//import org.apache.http.client.methods.HttpGet;
-//import org.apache.http.impl.client.DefaultHttpClient;
-//import org.apache.http.protocol.BasicHttpContext;
-//import org.apache.http.protocol.HttpContext;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import android.util.Log;
 
@@ -35,28 +34,26 @@ public class PortalCommunication {
 							+ encodedTags;
 		
 		Log.i(PortalCommunication.class.toString(), getUriString);
-		return "";
 
-//		DefaultHttpClient client = new DefaultHttpClient();
-//		HttpContext context = new BasicHttpContext();
-//		
-//		URI getUri = new URI(getUriString);
-//		HttpGet get = new HttpGet(getUri);
-//		HttpResponse response = null;
-//
-//		Log.i(TshakaaPosterActivity.class.toString(), "Trying to post url: " + getUri.toString());
-//		response = client.execute(get, context);
-//		Log.i(TshakaaPosterActivity.class.toString(), "Response(" + response.getStatusLine().getStatusCode() + "): " + response.getStatusLine().getReasonPhrase());
-//		HttpEntity entity = response.getEntity();
-//		Log.i(TshakaaPosterActivity.class.toString(), "Converting response to post url");
-//		InputStream inputStream = entity.getContent();
-//		String string = convertStreamToString(inputStream, ENCODING);
-//		return string;
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpContext context = new BasicHttpContext();
+		
+		URI getUri = new URI(getUriString);
+		HttpGet get = new HttpGet(getUri);
+		HttpResponse response = null;
+
+		Log.i(PortalCommunication.class.toString(), "Trying to post url: " + getUri.toString());
+		response = client.execute(get, context);
+		Log.i(PortalCommunication.class.toString(), "Response(" + response.getStatusLine().getStatusCode() + "): " + response.getStatusLine().getReasonPhrase());
+		HttpEntity entity = response.getEntity();
+		Log.i(PortalCommunication.class.toString(), "Converting response to post url");
+		InputStream inputStream = entity.getContent();
+		String string = convertStreamToString(inputStream);
+		return string;
 	}
 	
-	@SuppressWarnings("unused")
-	private static String convertStreamToString(InputStream is, String encoding) { 
-		return new Scanner(is, encoding).useDelimiter("\\A").next();
+	private static String convertStreamToString(InputStream is) { 
+		return new Scanner(is).useDelimiter("\\A").next();
 	}
 
 }
