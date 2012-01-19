@@ -25,30 +25,27 @@ public class TshakaaPosterActivity extends Activity {
 	private UserPrefs prefs;
 
 	/** Called when the activity is first created. */
-    @Override
-    public void onPostCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        String action = intent.getAction();
+	@Override
+	public void onPostCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        final EditText urlText = (EditText) findViewById(R.id.urlText);
-        
-        if(prefs == null) {
-    		this.prefs = new UserPrefs(getApplicationContext());
-    		setContentView(R.layout.main);
-    		buildUI();
-        	String pageUrl = extras.getString("android.intent.extra.TEXT");
-	        urlText.setText(pageUrl);
-        	
-        }
-		if(action.equals(Intent.ACTION_SEND)) {
+		if (prefs == null) {
+			this.prefs = new UserPrefs(getApplicationContext());
+		}
+
+		setContentView(R.layout.main);
+		buildUI();
+
+		Intent intent = getIntent();
+		Bundle extras = intent.getExtras();
+		String action = intent.getAction();
+		if (action.equals(Intent.ACTION_SEND)) {
 			String pageUrl = extras.getString("android.intent.extra.TEXT");
-//			String pageTitle = extras.getString("android.intent.extra.SUBJECT");
-	        urlText.setText(pageUrl);
+			EditText urlText = (EditText) findViewById(R.id.urlText);
+			urlText.setText(pageUrl);
 			showDialog(R.layout.tagsdialog);
 		}
-    }
+	}
 
     private void buildUI() {
 		// Linkify the help label
