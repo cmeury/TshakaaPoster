@@ -24,6 +24,6 @@ public class UserPrefs {
     	SharedPreferences.Editor editor = prefs.edit();
     	editor.putString(PREFS_USERID_KEY, userId);
     	editor.commit();
-    	Log.i(UserPrefs.class.toString(), "User ID " + userId + " stored in preferences");
+//    	Log.i(UserPrefs.class.toString(), "User ID " + userId + " stored in preferences");
     }
 }

@@ -33,7 +33,7 @@ public class PortalCommunication {
 							+ "&_pastelink_WAR_pastelinkportlet_tags="
 							+ encodedTags;
 		
-		Log.i(PortalCommunication.class.toString(), getUriString);
+//		Log.i(PortalCommunication.class.toString(), getUriString);
 
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpContext context = new BasicHttpContext();
@@ -42,11 +42,11 @@ public class PortalCommunication {
 		HttpGet get = new HttpGet(getUri);
 		HttpResponse response = null;
 
-		Log.i(PortalCommunication.class.toString(), "Trying to post url: " + getUri.toString());
+//		Log.i(PortalCommunication.class.toString(), "Trying to post url: " + getUri.toString());
 		response = client.execute(get, context);
-		Log.i(PortalCommunication.class.toString(), "Response(" + response.getStatusLine().getStatusCode() + "): " + response.getStatusLine().getReasonPhrase());
+//		Log.i(PortalCommunication.class.toString(), "Response(" + response.getStatusLine().getStatusCode() + "): " + response.getStatusLine().getReasonPhrase());
 		HttpEntity entity = response.getEntity();
-		Log.i(PortalCommunication.class.toString(), "Converting response to post url");
+//		Log.i(PortalCommunication.class.toString(), "Converting response to post url");
 		InputStream inputStream = entity.getContent();
 		String string = convertStreamToString(inputStream);
 		return string;

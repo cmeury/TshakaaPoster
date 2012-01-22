@@ -91,7 +91,7 @@ public class TshakaaPosterActivity extends Activity {
 				title = Util.getTitle(url);
 			} catch (Exception e) {
 				title = "unknown title";
-				Log.e(TshakaaPosterActivity.class.toString(), e.getMessage());
+//				Log.e(TshakaaPosterActivity.class.toString(), e.getMessage());
 			}
 		}
 		
@@ -99,15 +99,15 @@ public class TshakaaPosterActivity extends Activity {
 		spinner.setVisibility(View.VISIBLE);
 		try {
 			String postURL = PortalCommunication.postURL(prefs.getUserId(), url, title, tags);
-			Log.d(TshakaaPosterActivity.class.toString(), postURL);
+//			Log.d(TshakaaPosterActivity.class.toString(), postURL);
 			showToaster(getString(R.string.toast_postingUrlSuccessful), 2);
 		} catch (IOException e) {
-			Log.e(TshakaaPosterActivity.class.toString(),
-					"Failed to post URL to server.", e);
+//			Log.e(TshakaaPosterActivity.class.toString(),
+//					"Failed to post URL to server.", e);
 			showToaster(getString(R.string.toast_postingUrlFailedNetwork), 2);
 		} catch (URISyntaxException e) {
-			Log.e(TshakaaPosterActivity.class.toString(),
-					"Failed to post URL to server.", e);
+//			Log.e(TshakaaPosterActivity.class.toString(),
+//					"Failed to post URL to server.", e);
 			showToaster(getString(R.string.toast_postingUrlFailedSyntax), 2);
 		} finally {
 			spinner.setVisibility(View.INVISIBLE);

